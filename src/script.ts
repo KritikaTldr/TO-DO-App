@@ -3,16 +3,13 @@ const add = document.getElementById("add") as HTMLButtonElement;
 const list = document.getElementById("list") as HTMLElement;
 
 let tasks: string[] = loadTasks();
-
 function loadTasks(): string[] {
     const tasksJson = localStorage.getItem('tasks');
     return tasksJson ? JSON.parse(tasksJson) : [];
 }
-
 function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
-
 function renderTasks() {
     list.innerHTML = '';
 
@@ -45,7 +42,6 @@ function renderTasks() {
         const editButton = document.createElement('button');
         editButton.classList.add('w-[30px]', 'h-[30px]', 'mr-1');
         editButton.innerHTML = '<i class="fa-regular fa-pen-to-square fa-sm" style="color: #FFD43B;"></i>';
-
         const deleteButton = document.createElement('button');
         deleteButton.classList.add('w-[30px]', 'h-[30px]');
         deleteButton.innerHTML = '<i class="fa-regular fa-trash-can fa-sm" style="color: #ff0000;"></i>';
@@ -59,13 +55,11 @@ function renderTasks() {
         list.appendChild(taskElement);
     });
 }
-
 function addTask(totalTask: string) {
     tasks.push(totalTask);
     saveTasks();
     renderTasks();
 }
-
 function editTask(index: number) {
     const newTask = prompt('Edit Task: ', tasks[index]);
     if (newTask !== null) {
@@ -74,7 +68,6 @@ function editTask(index: number) {
         renderTasks();
     }
 }
-
 function deleteTask(index: number) {
     if (confirm(`Are you sure you want to delete "${tasks[index]}"?`)) {
         tasks.splice(index, 1);
@@ -82,7 +75,6 @@ function deleteTask(index: number) {
         renderTasks();
     }
 }
-
 add.addEventListener('click', () => {
     const taskText = task.value.trim();
     if (taskText !== '') {
@@ -92,7 +84,6 @@ add.addEventListener('click', () => {
         alert('Please enter a task!');
     }
 });
-
 task.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         const taskText = task.value.trim();
@@ -104,5 +95,4 @@ task.addEventListener('keydown', (event) => {
         }
     }
 });
-
 renderTasks();
